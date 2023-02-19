@@ -1,0 +1,17 @@
+FROM docker.io/library/java17 AS builder
+
+ADD . apache-ofbiz
+
+WORKDIR apache-ofbiz
+
+# Granting permission to gradlew 
+RUN chmod +x ./gradlew
+
+#for passing in entity engine config
+VOLUME apache-ofbiz/framework/entity/config/
+
+#for Derby Database
+VOLUME apache-ofbiz/runtime/data
+
+# Run ofbiz
+RUN ./gradlew build loadAll

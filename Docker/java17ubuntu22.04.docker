@@ -1,0 +1,14 @@
+FROM ubuntu:22.04 AS builder
+
+# Install OpenJDK-17
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jdk && \
+    apt-get install -y ant gradle && \
+    apt-get clean;
+
+# Setup JAVA_HOME path
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64/
+ENV JAVA_OPTS -Xmx3G
+RUN export JAVA_HOME
+
+ENTRYPOINT ["/usr/local/bin/tini", "--", "/usr/bin/java"]
