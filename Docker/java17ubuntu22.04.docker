@@ -12,3 +12,5 @@ ENV JAVA_OPTS -Xmx3G
 RUN export JAVA_HOME
 
 ENTRYPOINT ["/usr/local/bin/tini", "--", "/usr/bin/java"]
+
+
